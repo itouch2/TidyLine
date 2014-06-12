@@ -90,7 +90,7 @@ static TidyLine *sharedPlugin;
 
 - (void)doTidyText
 {
-    NSString *result = [TidyLineHandler eraseExtraLine:self.editorTextView.textStorage.string withType:TidyLineTypeAll];
+    NSString *result = [TidyLineHandler tidyLine:self.editorTextView.textStorage.string];
     NSAttributedString *string = [[NSAttributedString alloc] initWithString:result attributes:nil];
     [self.editorTextView.textStorage setAttributedString:string];
 }

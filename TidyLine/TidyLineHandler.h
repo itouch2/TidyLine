@@ -15,15 +15,13 @@
 
 @end
 
-typedef NS_ENUM(NSUInteger, TidyLineType) {
-    TidyLineTypeAll,
-    TidyLineTypeInMethod,
-    TidyLineTypeByMethod
-};
-
 @interface TidyLineHandler : NSObject
 
-+ (NSString *)eraseExtraLine:(NSString *)text withType:(TidyLineType)type;
++ (NSString *)tidyLine:(NSString *)text;
+
++ (NSString *)eraseExtraLine:(NSString *)text;
++ (NSString *)eraseExtraLineAfterLeftCurlyBrace:(NSString *)text;
++ (NSString *)eraseExtraLineBeforeRightCurlyBrace:(NSString *)text;
 
 @end
 
