@@ -11,6 +11,7 @@
 		CB0D66A4194750DE005B8D94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB0D66A3194750DE005B8D94 /* Foundation.framework */; };
 		CB0D66AA194750DE005B8D94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB0D66A8194750DE005B8D94 /* InfoPlist.strings */; };
 		CB0D66AD194750DE005B8D94 /* TidyLine.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0D66AC194750DE005B8D94 /* TidyLine.m */; };
+		CBB83FC8194979980019B43E /* TidyLineHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB83FC6194979980019B43E /* TidyLineHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,8 @@
 		CB0D66AB194750DE005B8D94 /* TidyLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TidyLine.h; sourceTree = "<group>"; };
 		CB0D66AC194750DE005B8D94 /* TidyLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TidyLine.m; sourceTree = "<group>"; };
 		CB0D66AE194750DE005B8D94 /* TidyLine-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TidyLine-Prefix.pch"; sourceTree = "<group>"; };
+		CBB83FC6194979980019B43E /* TidyLineHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TidyLineHandler.m; sourceTree = "<group>"; };
+		CBB83FC7194979980019B43E /* TidyLineHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TidyLineHandler.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 			children = (
 				CB0D66AB194750DE005B8D94 /* TidyLine.h */,
 				CB0D66AC194750DE005B8D94 /* TidyLine.m */,
+				CBB83FC7194979980019B43E /* TidyLineHandler.h */,
+				CBB83FC6194979980019B43E /* TidyLineHandler.m */,
 				CB0D66A6194750DE005B8D94 /* Supporting Files */,
 			);
 			path = TidyLine;
@@ -145,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB83FC8194979980019B43E /* TidyLineHandler.m in Sources */,
 				CB0D66AD194750DE005B8D94 /* TidyLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +288,7 @@
 				CB0D66B3194750DE005B8D94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

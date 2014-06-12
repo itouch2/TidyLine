@@ -7,12 +7,19 @@
 //
 
 #import "TidyLine.h"
+#import "TidyLineHandler.h"
+
+static NSString * const IDESourceCodeEditorDidFinishSetupNotification = @"IDESourceCodeEditorDidFinishSetup";
+static NSString * const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocumentDidChangeNotification";
+static NSString * const IDESourceCodeEditorTextViewBoundsDidChangeNotification = @"IDESourceCodeEditorTextViewBoundsDidChangeNotification";
 
 static TidyLine *sharedPlugin;
 
 @interface TidyLine()
 
 @property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, strong) NSTextView *editorTextView;
+
 @end
 
 @implementation TidyLine
@@ -30,29 +37,62 @@ static TidyLine *sharedPlugin;
 
 - (id)initWithBundle:(NSBundle *)plugin
 {
-    if (self = [super init]) {
+    if (self = [super init])
+    {
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
         
-        // Create menu items, initialize UI, etc.
-
-        // Sample Menu Item:
-        NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
+        // Create menu item
+        NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Window"];
         if (menuItem) {
             [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
-            NSMenuItem *actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Do Action" action:@selector(doMenuAction) keyEquivalent:@""];
+            NSMenuItem *actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"TidyLine"
+                                                                    action:@selector(doTidyText)
+                                                             keyEquivalent:@"u"];
+            [actionMenuItem setKeyEquivalentModifierMask:NSControlKeyMask|NSShiftKeyMask];
             [actionMenuItem setTarget:self];
             [[menuItem submenu] addItem:actionMenuItem];
         }
+        
+        [self registerNotifications];
     }
     return self;
 }
 
-// Sample Action, for menu item:
-- (void)doMenuAction
+- (void)registerNotifications
 {
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Hello, World" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
-    [alert runModal];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onDidFinishSetup:)
+                                                 name:IDESourceCodeEditorDidFinishSetupNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onDocumentDidChange:)
+                                                 name:IDEEditorDocumentDidChangeNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onCodeEditorBoundsChange:)
+                                                 name:IDESourceCodeEditorTextViewBoundsDidChangeNotification
+                                               object:nil];
+}
+
+- (void)onDidFinishSetup:(NSNotification *)notification
+{
+    self.editorTextView = [[notification object] performSelector:@selector(textView)];
+}
+
+- (void)onDocumentDidChange:(NSNotification *)notification
+{
+}
+
+- (void)onCodeEditorBoundsChange:(NSNotification *)notification
+{
+}
+
+- (void)doTidyText
+{
+    NSString *result = [TidyLineHandler eraseExtraLine:self.editorTextView.textStorage.string withType:TidyLineTypeAll];
+    NSAttributedString *string = [[NSAttributedString alloc] initWithString:result attributes:nil];
+    [self.editorTextView.textStorage setAttributedString:string];
 }
 
 - (void)dealloc
