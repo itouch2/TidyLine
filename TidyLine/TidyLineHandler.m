@@ -81,7 +81,10 @@
             [result appendString:@"\n"];
         }
     }];
-    return result;
+    
+    NSString *finalResult = [[NSString alloc] initWithString:result];
+    finalResult = [finalResult substringToIndex:(finalResult.length - 1)];
+    return finalResult;
 }
 
 + (NSString *)eraseExtraLineAfterLeftCurlyBrace:(NSString *)text
@@ -140,7 +143,10 @@
             [result appendString:@"\n"];
         }
     }];
-    return result;
+    
+    NSString *finalResult = [[NSString alloc] initWithString:result];
+    finalResult = [finalResult substringToIndex:(finalResult.length - 1)];
+    return finalResult;
 }
 
 + (NSString *)eraseExtraLineBeforeRightCurlyBrace:(NSString *)text
@@ -199,7 +205,10 @@
             [result appendString:@"\n"];
         }
     }];
-    return result;
+    
+    NSString *finalResult = [[NSString alloc] initWithString:result];
+    finalResult = [finalResult substringToIndex:(finalResult.length - 1)];
+    return finalResult;
 }
 
 @end
