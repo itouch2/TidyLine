@@ -93,6 +93,24 @@ static TidyLine *sharedPlugin;
     NSString *result = [TidyLineHandler tidyLine:self.editorTextView.textStorage.string];
     NSAttributedString *string = [[NSAttributedString alloc] initWithString:result attributes:nil];
     [self.editorTextView.textStorage setAttributedString:string];
+    
+    [self saveText];
+}
+
+- (void)saveText
+{
+    NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
+    
+    NSArray *items = [[menuItem submenu] itemArray];
+    
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSMenuItem *item = (NSMenuItem *)obj;
+        
+        if ([item.title isEqualToString:@"Save"])
+        {
+            [item.target performSelector:item.action];
+        }
+    }];
 }
 
 - (void)dealloc
